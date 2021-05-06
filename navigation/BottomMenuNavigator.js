@@ -13,7 +13,7 @@ const BottomMenuNavigator = createMaterialBottomTabNavigator(
 			navigationOptions: {
 				tabBarLabel: 'Pending',
 				tabBarIcon: ({tintColor}) => {
-					return <MaterialIcons name='Pending' size={22} color={tintColor} />;
+					return <MaterialIcons name='dashboard' size={22} color={tintColor} />;
 				},
 			},
 		},
@@ -22,7 +22,7 @@ const BottomMenuNavigator = createMaterialBottomTabNavigator(
 			navigationOptions: {
 				tabBarLabel: 'Ready',
 				tabBarIcon: ({tintColor}) => {
-					return <MaterialIcons name='Ready' size={22} color={tintColor} />;
+					return <MaterialIcons name='search' size={22} color={tintColor} />;
 				},
 			},
 		},
@@ -31,7 +31,7 @@ const BottomMenuNavigator = createMaterialBottomTabNavigator(
 			navigationOptions: {
 				tabBarLabel: 'Issued',
 				tabBarIcon: ({tintColor}) => {
-					return <MaterialIcons name='Issued' size={22} color={tintColor} />;
+					return <MaterialIcons name='history' size={22} color={tintColor} />;
 				},
 			},
 		},

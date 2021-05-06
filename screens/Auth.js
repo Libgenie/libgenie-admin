@@ -15,7 +15,6 @@ import styles from './authstyles';
 import {Formik} from 'formik';
 
 import {loginUser} from '../store/actions/auth';
-import {storeUser} from '../store/actions/user';
 import {useDispatch, useSelector} from 'react-redux';
 
 const Auth = props => {
@@ -49,7 +48,6 @@ const Auth = props => {
 			setIsLoading(true);
 			setError([false, null]);
 			await dispatch(loginUser(values.email, values.password));
-			await dispatch(storeUser());
 			setIsLoading(false);
 			props.navigation.navigate('BottomMenuTabNavigator');
 			console.log('User Ready!');

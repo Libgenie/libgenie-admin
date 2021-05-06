@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-const Ready = () => {
+const Issued = () => {
 	return (
 		<View
 			style={{
@@ -9,9 +9,9 @@ const Ready = () => {
 				justifyContent: 'center',
 				alignItems: 'center',
 			}}>
-			<Text>Ready UI</Text>
+			<Text>Issue UI</Text>
 		</View>
 	);
 };
 
-export default Ready;
+export default Issued;
