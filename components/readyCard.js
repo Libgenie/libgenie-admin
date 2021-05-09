@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from '../screens/pendingstyles';
 // import Returned from '../assets/Returned';
 
-const HCard = ({ item }) => {
+const ReadyCard = ({ item }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = () => {
@@ -14,7 +14,7 @@ const HCard = ({ item }) => {
     <View style={styles.subCardContainer}>
       <View style={{ width: '100%' }}>
         <Text style={styles.bookName} numberOfLines={1}>
-          {item.name.charAt(0).toUpperCase() + item.name.substring(1)}
+          {item.bookname.charAt(0).toUpperCase() + item.bookname.substring(1)}
         </Text>
 
         <View style={styles.dateContainer}>
@@ -59,7 +59,7 @@ const HCard = ({ item }) => {
             <View
               style={{
                 marginBottom: 10,
-                backgroundColor: '#f9a826',
+                backgroundColor: '#00B7FF',
                 borderRadius: 12,
                 padding: 12,
                 elevation: 6,
@@ -95,4 +95,4 @@ const HCard = ({ item }) => {
   );
 };
 
-export default HCard;
+export default ReadyCard;

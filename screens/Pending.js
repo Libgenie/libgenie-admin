@@ -60,37 +60,6 @@ const Pending = () => {
       </View>
     );
 
-  const data = [
-    {
-      key: 1,
-      bookname: 'THIS IS MY BOOK NAME WHICH IS MY FAVOURITE',
-      author: 'Ishika Mukherjee',
-      edition: 15,
-      stuid: 31001219052,
-    },
-    {
-      key: 2,
-      bookname: 'THIS IS MY BOOK NAME',
-      author: 'Ishika Mukherjee',
-      edition: 15,
-      stuid: 31001219052,
-    },
-    {
-      key: 3,
-      bookname: 'THIS IS MY BOOK NAME',
-      author: 'Ishika Mukherjee',
-      edition: 15,
-      stuid: 31001219052,
-    },
-    {
-      key: 4,
-      bookname: 'THIS IS MY BOOK NAME',
-      author: 'Ishika Mukherjee',
-      edition: 15,
-      stuid: 31001219052,
-    },
-  ];
-
   return (
     <ImageBackground source={require('../assets/history-bg.png')} style={styles.screen}>
       <View style={styles.headerContainer}>
@@ -99,10 +68,10 @@ const Pending = () => {
 
       <View style={styles.cardContainer}>
         {/* Book Details */}
-        {data.length > 0 ? (
+        {pending.length > 0 ? (
           <FlatList
-            data={data}
-            keyExtractor={repo => repo.key}
+            data={pending}
+            keyExtractor={pendingItem => pendingItem.request_id}
             renderItem={({ item }) => <Subcard item={item} />}
           />
         ) : (
@@ -130,4 +99,4 @@ const Pending = () => {
   );
 };
 
-export default History;
+export default Pending;
