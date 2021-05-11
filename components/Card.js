@@ -5,9 +5,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from '../screens/pendingstyles';
 // import Returned from '../assets/Returned';
 
-const Card = ({ item }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { loading, error, errorMessage, setIsClicked } = useUpdate();
+const Card = ({ item, loading, setIsClicked }) => {
   let btnColor = '';
   if (item.status === 3) {
     btnColor = '#f9a826';
@@ -17,7 +15,7 @@ const Card = ({ item }) => {
 
   const handleClick = () => {
     console.log('Clicked!');
-    setIsClicked({ issue_id: item.request_id, return_date: '2021-05-22T18:29:59.000Z' });
+    setIsClicked({ issue_id: 123, return_date: '2021-05-22T18:29:59.000Z' });
   };
   return (
     <View style={styles.subCardContainer}>

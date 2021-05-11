@@ -34,11 +34,10 @@ const useUpdate = () => {
       console.log(response.data.body);
     } catch (err) {
       setError(true);
-      setErrorMessage(err.response.body);
-      console.log(err.response.body);
-    } finally {
+      setErrorMessage(err.message);
+      console.log('Error', err);
+      console.log(err.message);
       setIsLoading(false);
-      setError(false);
     }
   };
 
@@ -47,6 +46,7 @@ const useUpdate = () => {
     error,
     errorMessage,
     setIsClicked,
+    setError,
   };
 };
 

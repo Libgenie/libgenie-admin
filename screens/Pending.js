@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, Alert, ActivityIndicator, ImageBackground, FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import useUpdate from '../hooks/useUpdate';
 import { getRequests } from '../store/actions/request';
 import styles from './pendingstyles';
 import Card from '../components/Card';
@@ -9,9 +10,10 @@ import NoData from '../assets/defaultPending';
 const Pending = () => {
   const dispatch = useDispatch();
   const pending = useSelector(state => state.requests.pending);
+  const { loading, error: Error, errorMessage, setIsClicked, setError: setErr } = useUpdate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  console.log('Hi I am Pending Array', pending);
+  // console.log('Hi I am Pending Array', pending);
   useEffect(() => {
     try {
       setIsLoading(true);
@@ -36,6 +38,20 @@ const Pending = () => {
     }
   }, [error.status]);
 
+  useEffect(() => {
+    if (Error) {
+      Alert.alert('Error!', errorMessage, [
+        {
+          text: 'Ok',
+          onPress: () => {
+            console.log('Alerted!');
+            setErr(false);
+          },
+        },
+      ]);
+    }
+  }, [Error]);
+
   if (isLoading)
     return (
       <View
@@ -45,18 +61,6 @@ const Pending = () => {
           alignItems: 'center',
         }}>
         <ActivityIndicator size='large' color='#00ff00' />
-      </View>
-    );
-
-  if (pending.length === 0)
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text>No Pending Status to Show</Text>
       </View>
     );
 
@@ -72,7 +76,9 @@ const Pending = () => {
           <FlatList
             data={pending}
             keyExtractor={pendingItem => pendingItem.request_id}
-            renderItem={({ item }) => <Card item={item} />}
+            renderItem={({ item }) => (
+              <Card item={item} loading={loading} setIsClicked={setIsClicked} />
+            )}
           />
         ) : (
           <View
