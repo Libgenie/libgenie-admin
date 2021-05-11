@@ -17,6 +17,7 @@ const BottomMenuNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => {
           return <MaterialIcons name='pending-actions' size={24} color={tintColor} />;
         },
+        activeColor: '#f9a826',
       },
     },
     Ready: {
@@ -26,6 +27,7 @@ const BottomMenuNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => {
           return <FontAwesome name='thumbs-o-up' size={22} color={tintColor} />;
         },
+        activeColor: '#00B7FF',
       },
     },
     Issued: {
