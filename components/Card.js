@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
 import useUpdate from '../hooks/useUpdate';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, Alert, TouchableOpacity } from 'react-native';
 import styles from '../screens/pendingstyles';
 // import Returned from '../assets/Returned';
 
-const Card = ({ item, loading, setIsClicked }) => {
+const Card = ({ item }) => {
+  const { loading, error, errorMessage, setIsClicked, setError } = useUpdate();
   let btnColor = '';
   if (item.status === 3) {
     btnColor = '#f9a826';
@@ -13,9 +13,23 @@ const Card = ({ item, loading, setIsClicked }) => {
     btnColor = '#00B7FF';
   }
 
+  useEffect(() => {
+    if (error) {
+      Alert.alert('Error!', errorMessage, [
+        {
+          text: 'Ok',
+          onPress: () => {
+            console.log('Alerted!');
+            setError(false);
+          },
+        },
+      ]);
+    }
+  }, [error]);
+
   const handleClick = () => {
     console.log('Clicked!');
-    setIsClicked({ issue_id: 123, return_date: '2021-05-22T18:29:59.000Z' });
+    setIsClicked({ issue_id: item.request_id, return_date: '2021-05-22T18:29:59.000Z' });
   };
   return (
     <View style={styles.subCardContainer}>
@@ -86,7 +100,11 @@ const Card = ({ item, loading, setIsClicked }) => {
                     fontFamily: 'Lato_400Regular',
                     letterSpacing: 2,
                   }}>
-                  Accept Request
+                  {item.status === 3
+                    ? 'Accept Request'
+                    : item.status === 2
+                    ? 'Update Status'
+                    : 'Accept Return'}
                 </Text>
               ) : (
                 <Text
@@ -97,7 +115,7 @@ const Card = ({ item, loading, setIsClicked }) => {
                     fontFamily: 'Lato_400Regular',
                     letterSpacing: 2,
                   }}>
-                  Loading...
+                  {item.status === 2 ? 'Updating...' : 'Accepting...'}
                 </Text>
               )}
             </View>
@@ -108,4 +126,4 @@ const Card = ({ item, loading, setIsClicked }) => {
   );
 };
 
-export default Card;
+export default React.memo(Card);

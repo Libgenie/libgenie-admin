@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, Alert, ActivityIndicator, ImageBackground, FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import useUpdate from '../hooks/useUpdate';
 import { getRequests } from '../store/actions/request';
 import styles from './pendingstyles';
 import Card from '../components/Card';
@@ -10,7 +9,7 @@ import NoData from '../assets/defaultPending';
 const Pending = () => {
   const dispatch = useDispatch();
   const pending = useSelector(state => state.requests.pending);
-  const { loading, error: Error, errorMessage, setIsClicked, setError: setErr } = useUpdate();
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   // console.log('Hi I am Pending Array', pending);
@@ -38,20 +37,6 @@ const Pending = () => {
     }
   }, [error.status]);
 
-  useEffect(() => {
-    if (Error) {
-      Alert.alert('Error!', errorMessage, [
-        {
-          text: 'Ok',
-          onPress: () => {
-            console.log('Alerted!');
-            setErr(false);
-          },
-        },
-      ]);
-    }
-  }, [Error]);
-
   if (isLoading)
     return (
       <View
@@ -76,9 +61,7 @@ const Pending = () => {
           <FlatList
             data={pending}
             keyExtractor={pendingItem => pendingItem.request_id}
-            renderItem={({ item }) => (
-              <Card item={item} loading={loading} setIsClicked={setIsClicked} />
-            )}
+            renderItem={({ item }) => <Card item={item} />}
           />
         ) : (
           <View
