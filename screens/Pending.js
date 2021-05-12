@@ -45,7 +45,7 @@ const Pending = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <ActivityIndicator size='large' color='#00ff00' />
+        <ActivityIndicator size='large' color='#f9a826' />
       </View>
     );
 

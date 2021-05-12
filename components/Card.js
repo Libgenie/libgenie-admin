@@ -7,10 +7,19 @@ import styles from '../screens/pendingstyles';
 const Card = ({ item }) => {
   const { loading, error, errorMessage, setIsClicked, setError } = useUpdate();
   let btnColor = '';
+  let btn = '';
   if (item.status === 3) {
     btnColor = '#f9a826';
   } else if (item.status === 2) {
     btnColor = '#00B7FF';
+  } else if (item.status === 1) {
+    if (new Date(item.return_date) < new Date()) {
+      btnColor = '#c90411';
+      btn = 'Running Late';
+    } else {
+      btnColor = '#33af85';
+      btn = 'Accept Return';
+    }
   }
 
   useEffect(() => {
@@ -29,7 +38,7 @@ const Card = ({ item }) => {
 
   const handleClick = () => {
     console.log('Clicked!');
-    setIsClicked({ issue_id: item.request_id, return_date: '2021-05-22T18:29:59.000Z' });
+    setIsClicked({ issue_id: item.request_id, return_date: '2021-05-10T18:29:59.000Z' });
   };
   return (
     <View style={styles.subCardContainer}>
@@ -100,11 +109,7 @@ const Card = ({ item }) => {
                     fontFamily: 'Lato_400Regular',
                     letterSpacing: 2,
                   }}>
-                  {item.status === 3
-                    ? 'Accept Request'
-                    : item.status === 2
-                    ? 'Update Status'
-                    : 'Accept Return'}
+                  {item.status === 3 ? 'Accept Request' : item.status === 2 ? 'Update Status' : btn}
                 </Text>
               ) : (
                 <Text

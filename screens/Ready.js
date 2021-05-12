@@ -3,10 +3,22 @@ import { Text, View, Alert, ActivityIndicator, ImageBackground, FlatList } from 
 import { useSelector } from 'react-redux';
 import styles from './pendingstyles';
 import Card from '../components/Card';
-import NoData from '../assets/defaultPending';
+import NoData from '../assets/defaultReady';
 
 const Ready = () => {
   const ready = useSelector(state => state.requests.ready);
+
+  if (isLoading)
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <ActivityIndicator size='large' color='#00B7FF' />
+      </View>
+    );
 
   return (
     <ImageBackground source={require('../assets/ready-bg.png')} style={styles.screen}>
@@ -38,7 +50,7 @@ const Ready = () => {
                 fontFamily: 'Lato_400Regular',
                 opacity: 0.5,
               }}>
-              There aren't any pending requests...
+              There aren't any books ready for pickup...
             </Text>
           </View>
         )}
